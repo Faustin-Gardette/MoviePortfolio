@@ -4,36 +4,49 @@
 @tailwind components;
 @tailwind utilities;
 
-h1,
-h2,
-h3 {
-  color: white;
-}
-
 body {
   font-family: "manrope";
+  background-color: #1e1e1e;
+  color: white;
 }
-
 p {
   color: white;
 }
+li {
+  cursor: pointer;
+}
 
-.back-primary {
+.back-grey1 {
   background-color: #1e1e1e;
 }
-
-.back-secondary {
+.back-grey2 {
   background-color: #151515;
 }
-
-.back-button {
+.back-red {
   background-color: #ff0000;
 }
 
-.color-red {
+.grey1 {
+  color: #1e1e1e;
+}
+.grey2 {
+  color: #949ba6;
+}
+.red {
   color: #ff0000;
 }
 
 .shadow-red:hover {
   box-shadow: 0px 0px 10px #ff0000;
+}
+
+.shadow-grey {
+  box-shadow: 0px 0px 20px black;
+}
+.shadow-grey-hover:hover {
+  box-shadow: 0px 0px 30px black;
+}
+
+.card {
+  background-color: #343434;
 }
