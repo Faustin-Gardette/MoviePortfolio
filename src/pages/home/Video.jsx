@@ -1,5 +1,5 @@
 import React from "react";
-import video from "../../../public/assets/video.mp4";
+import video from "../../assets/video.mp4";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 

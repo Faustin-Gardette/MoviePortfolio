@@ -7,7 +7,6 @@ import Tv from "./pages/home/Tv";
 import Movies from "./pages/home/Movies";
 import List from "./pages/home/List";
 import Navbar from "./components/Navbar";
-import Left from "./components/Left";
 import Video from "./pages/home/Video";
 
 const Layout = () => {
