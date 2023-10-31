@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "manrope";
+  background-color: #1e1e1e;
+  color: white;
+}
+p {
+  color: white;
+}
+li {
+  cursor: pointer;
+}
+
+.back-grey1 {
+  background-color: #1e1e1e;
+}
+.back-grey2 {
+  background-color: #151515;
+}
+.back-red {
+  background-color: #ff0000;
+}
+
+.grey1 {
+  color: #1e1e1e;
+}
+.grey2 {
+  color: #949ba6;
+}
+.red {
+  color: #ff0000;
+}
+
+.shadow-red:hover {
+  box-shadow: 0px 0px 10px #ff0000;
+}
+
+.shadow-grey {
+  box-shadow: 0px 0px 20px black;
+}
+.shadow-grey-hover:hover {
+  box-shadow: 0px 0px 30px black;
+}
+
+.card {
+  background-color: #343434;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: #1e1e1e;
+  color: #ff0000;
+  padding: 20px;
+  border-radius: 0.5rem;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 24px;
+}
+
+.swiper-container {
+  transition: all 0.3s; /* Animation douce */
+}
+
+.swiper-container:hover {
+  transform: scale(1.1); /* Augmenter la taille de 10% au survol */
+}
