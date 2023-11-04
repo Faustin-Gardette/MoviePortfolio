@@ -65,6 +65,29 @@ export const fetchMovies = createAsyncThunk(
   }
 );
 
+export const getUserLikedMovies = createAsyncThunk(
+  "movieApp/getLiked",
+  async (email) => {
+    const {
+      data: { movies },
+    } = await axios.get(`http://localhost:5000/server/user/liked/${email}`);
+    return movies;
+  }
+);
+
+export const removeFromLikedMovies = createAsyncThunk(
+  "movieApp/deleteLiked",
+  async ({ movieId, email }) => {
+    const {
+      data: { movies },
+    } = await axios.put(`http://localhost:5000/server/user/delete`, {
+      email,
+      movieId,
+    });
+    return movies;
+  }
+);
+
 export const fetchDataByGenre = createAsyncThunk(
   "movieApp/genre",
   async ({ genre, type }, thunkApi) => {
@@ -90,6 +113,12 @@ const appSlice = createSlice({
       state.movies = action.payload;
     });
     builder.addCase(fetchDataByGenre.fulfilled, (state, action) => {
+      state.movies = action.payload;
+    });
+    builder.addCase(getUserLikedMovies.fulfilled, (state, action) => {
+      state.movies = action.payload;
+    });
+    builder.addCase(removeFromLikedMovies.fulfilled, (state, action) => {
       state.movies = action.payload;
     });
   },

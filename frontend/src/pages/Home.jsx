@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, getGenres } from "../store";
 import HeaderSlide from "../components/HeaderSlide";
 import Categories from "../components/Categories";
+import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "../utils/firebase";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -17,6 +20,12 @@ const Home = () => {
   useEffect(() => {
     if (genresLoaded) dispatch(fetchMovies({ type: "all" }));
   }, [genresLoaded]);
+
+  const navigate = useNavigate();
+
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (!currentUser) navigate("/connexion");
+  });
 
   return (
     <div>

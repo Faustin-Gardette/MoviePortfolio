@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { firebaseAuth } from "../utils/firebase";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -18,8 +20,6 @@ const Login = () => {
       console.log(err);
     }
   };
-
-  const navigate = useNavigate();
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) navigate("/");

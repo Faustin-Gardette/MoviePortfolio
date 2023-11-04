@@ -1,15 +1,21 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { LogOut, Search } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { firebaseAuth } from "../utils/firebase";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (!currentUser) navigate("/connexion");
-  });
+  const handleOut = () => {
+    signOut(firebaseAuth)
+      .then(() => {
+        navigate("/connexion");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="flex items-center justify-between gap-4">
@@ -36,7 +42,7 @@ const Navbar = () => {
         <Link to="/liste">
           <li>Ma liste</li>
         </Link>
-        <li onClick={() => signOut(firebaseAuth)}>
+        <li onClick={handleOut}>
           <LogOut color="#ff0000" />
         </li>
       </ul>
