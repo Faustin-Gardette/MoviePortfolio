@@ -9,6 +9,9 @@
 /.vscode
 /.idea
 
+# Fichier de variables d'environnement
+.env
+
 # Fichiers de configuration locaux
 .env.local
 .env.development.local
