@@ -72,7 +72,9 @@ export const getUserLikedMovies = createAsyncThunk(
   async (email) => {
     const {
       data: { movies },
-    } = await axios.get(`http://localhost:5000/server/user/liked/${email}`);
+    } = await axios.get(
+      `https://movieapp-back-fcot.onrender.com/server/user/liked/${email}`
+    );
     return movies;
   }
 );
@@ -82,10 +84,13 @@ export const removeFromLikedMovies = createAsyncThunk(
   async ({ movieId, email }) => {
     const {
       data: { movies },
-    } = await axios.put(`http://localhost:5000/server/user/delete`, {
-      email,
-      movieId,
-    });
+    } = await axios.put(
+      `https://movieapp-back-fcot.onrender.com/server/user/delete`,
+      {
+        email,
+        movieId,
+      }
+    );
     return movies;
   }
 );

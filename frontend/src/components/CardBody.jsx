@@ -27,10 +27,13 @@ const CardBody = ({ movieData, isLiked = false }) => {
 
   const addToList = async () => {
     try {
-      await axios.post("http://localhost:5000/server/user/add", {
-        email,
-        data: movieData,
-      });
+      await axios.post(
+        "https://movieapp-back-fcot.onrender.com/server/user/add",
+        {
+          email,
+          data: movieData,
+        }
+      );
     } catch (err) {
       console.log(err);
     }
