@@ -1,0 +1,25 @@
+# Dépendances
+/node_modules
+
+# Logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Fichier de variables d'environnement
+.env
+
+# Dossier de build
+/dist
+
+# Fichiers de cache de l'IDE
+/.vscode
+/.idea
+
+# Fichiers de cache de l'OS
+.DS_Store

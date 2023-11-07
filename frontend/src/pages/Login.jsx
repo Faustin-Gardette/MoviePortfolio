@@ -1,5 +1,5 @@
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { firebaseAuth } from "../utils/firebase";
 
@@ -21,10 +21,15 @@ const Login = () => {
     }
   };
 
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (currentUser) navigate("/");
-  });
+  useEffect(() => {
+    const connexion = onAuthStateChanged(firebaseAuth, (currentUser) => {
+      if (currentUser) {
+        navigate("/");
+      }
+    });
 
+    return () => connexion();
+  }, [navigate]);
   return (
     <div>
       <div className="h-screen flex items-center justify-center ">
@@ -32,7 +37,7 @@ const Login = () => {
           <h1 className="text-3xl">Connexion</h1>
           <input
             type="text"
-            placeholder="Email"
+            placeholder="blabla@gmail.com"
             className="rounded-sm px-2 py-1 focus:outline-none grey1 "
             name="email"
             onChange={(e) =>

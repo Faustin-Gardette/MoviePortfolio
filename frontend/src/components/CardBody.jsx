@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { Heart, HeartOff, PlayCircle, Plus } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { firebaseAuth } from "../utils/firebase";
 import axios from "axios";
@@ -14,10 +14,16 @@ const CardBody = ({ movieData, isLiked = false }) => {
 
   const [email, setEmail] = useState(undefined);
 
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (currentUser) setEmail(currentUser.email);
-    else navigate("/connexion");
-  });
+  useEffect(() => {
+    const getEmail = onAuthStateChanged(firebaseAuth, (currentUser) => {
+      if (currentUser) {
+        setEmail(currentUser.email);
+      } else {
+        navigate("/connexion");
+      }
+    });
+    return () => getEmail();
+  }, [navigate]);
 
   const addToList = async () => {
     try {
@@ -41,9 +47,10 @@ const CardBody = ({ movieData, isLiked = false }) => {
           alt={movieData.name}
         />
         {isHovered && (
-          <div className="">
-            <div className="absolute z-10 top-2 left-2">
-              <h2>{movieData.name}</h2>
+          <div>
+            <div className="absolute z-10 bg-black bg-opacity-50 top-0 bottom-0 left-0 right-0 rounded-lg"></div>
+            <div className="absolute z-10 top-2 left-2 ">
+              <h2 className=" font-semibold">{movieData.name}</h2>
               <ul className="flex gap-2">
                 {movieData.genres.map((genre, index) => (
                   <li className="cursor-default" key={index}>
@@ -77,9 +84,6 @@ const CardBody = ({ movieData, isLiked = false }) => {
                   <Heart size={20} color="#ff0000" onClick={addToList} />
                 </div>
               )}
-              <div className="back-grey1 rounded-full p-1 cursor-pointer transition-all hover:bg-[#b8b8b8]">
-                <Plus size={20} color="#ff0000" />
-              </div>
             </div>
           </div>
         )}

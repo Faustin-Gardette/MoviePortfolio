@@ -6,6 +6,7 @@ import SelectGenres from "../../components/SelectGenres";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../../utils/firebase";
+import NotContent from "../../components/NotContent";
 
 const Tv = () => {
   const dispatch = useDispatch();
@@ -24,14 +25,19 @@ const Tv = () => {
 
   const navigate = useNavigate();
 
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (!currentUser) navigate("/connexion");
-  });
+  useEffect(() => {
+    const logout = onAuthStateChanged(firebaseAuth, (currentUser) => {
+      if (!currentUser) {
+        navigate("/connexion");
+      }
+    });
+    return () => logout();
+  }, [navigate]);
 
   return (
     <div>
-      <SelectGenres genres={genres} type="tv" />
-      <Categories movies={movies} />
+      <SelectGenres genres={genres} type="tv" title="Tv" />
+      {movies.length ? <Categories movies={movies} /> : <NotContent />}
     </div>
   );
 };

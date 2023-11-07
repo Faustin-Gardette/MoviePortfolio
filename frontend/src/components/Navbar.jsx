@@ -1,35 +1,18 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { LogOut, Search } from "lucide-react";
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { LogOut } from "lucide-react";
+import React from "react";
+import { Link } from "react-router-dom";
 import { firebaseAuth } from "../utils/firebase";
 
 const Navbar = () => {
-  const navigate = useNavigate();
-
-  const handleOut = () => {
-    signOut(firebaseAuth)
-      .then(() => {
-        navigate("/connexion");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
     <div className="flex items-center justify-between gap-4">
-      <div className="flex items-center transition-all  shadow-grey shadow-grey-hover px-4 py-2 rounded-lg">
-        <input
-          type="text"
-          placeholder="Rechercher"
-          className="text-white back-grey1 outline-none"
-        />
-        <button className="grey2 pl-2">
-          <Search size={20} />
-        </button>
+      <div className="">
+        <h1 className=" text-xl sm:text-3xl font-semibold ">
+          Movie <span className="red">App</span>
+        </h1>
       </div>
-      <ul className="flex gap-4">
+      <ul className="flex gap-4 text-sm sm:text-base">
         <Link to="/">
           <li>Accueil</li>
         </Link>
@@ -42,7 +25,7 @@ const Navbar = () => {
         <Link to="/liste">
           <li>Ma liste</li>
         </Link>
-        <li onClick={handleOut}>
+        <li onClick={() => signOut(firebaseAuth)}>
           <LogOut color="#ff0000" />
         </li>
       </ul>

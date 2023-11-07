@@ -11,7 +11,6 @@ import Video from "./pages/home/Video";
 
 const Layout = () => {
   return (
-    // Element left pour modifier style film
     <>
       <nav className="m-8">
         <Navbar />

@@ -3,8 +3,10 @@ import {
   createAsyncThunk,
   createSlice,
 } from "@reduxjs/toolkit";
-import { API_KEY, TMBD_BASE_URL } from "../utils/constant";
 import axios from "axios";
+
+const apiKey = import.meta.env.VITE_API_KEY;
+const tmbdUrl = import.meta.env.VITE_TMBD_BASE_URL;
 
 const initialState = {
   movies: [],
@@ -16,7 +18,7 @@ export const getGenres = createAsyncThunk("movieApp/genres", async () => {
   const {
     data: { genres },
   } = await axios.get(
-    `${TMBD_BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=fr-FR`
+    `${tmbdUrl}/genre/movie/list?api_key=${apiKey}&language=fr-FR`
   );
   return genres;
 });
@@ -58,7 +60,7 @@ export const fetchMovies = createAsyncThunk(
       movieApp: { genres },
     } = thunkApi.getState();
     return getRawData(
-      `${TMBD_BASE_URL}/trending/${type}/week?api_key=${API_KEY}&language=fr-FR`,
+      `${tmbdUrl}/trending/${type}/week?api_key=${apiKey}&language=fr-FR`,
       genres,
       true
     );
@@ -95,7 +97,7 @@ export const fetchDataByGenre = createAsyncThunk(
       movieApp: { genres },
     } = thunkApi.getState();
     return getRawData(
-      `${TMBD_BASE_URL}/discover/${type}?api_key=${API_KEY}&with_genres=${genre}&language=fr-FR`,
+      `${tmbdUrl}/discover/${type}?api_key=${apiKey}&with_genres=${genre}&language=fr-FR`,
       genres
     );
   }

@@ -18,7 +18,7 @@ const HeaderSlide = ({ movies }) => {
         modules={[Autoplay]}
       >
         {movies.slice(0, 10).map((movie, index) => (
-          <SwiperSlide key={index} style={{ width: "70%" }}>
+          <SwiperSlide key={index} className="swiper-slide-custom">
             <CardHeader movie={movie} />
           </SwiperSlide>
         ))}

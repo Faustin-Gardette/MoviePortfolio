@@ -29,7 +29,7 @@ export const getLikedMovies = async (req, res) => {
     if (user) {
       return res.json({ msg: "success", movies: user.likedMovies });
     } else return res.json({ msg: "Email pas trouvé" });
-  } catch (error) {
+  } catch (err) {
     return res.json({ msg: "Pas fetch films" });
   }
 };

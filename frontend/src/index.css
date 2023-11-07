@@ -65,9 +65,19 @@ li {
 }
 
 .swiper-container {
-  transition: all 0.3s; /* Animation douce */
+  transition: all 0.3s;
 }
 
 .swiper-container:hover {
-  transform: scale(1.1); /* Augmenter la taille de 10% au survol */
+  transform: scale(1.1);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .swiper-slide-custom {
+    width: 70%;
+  }
 }

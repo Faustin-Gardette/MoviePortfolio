@@ -23,9 +23,14 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (!currentUser) navigate("/connexion");
-  });
+  useEffect(() => {
+    const logout = onAuthStateChanged(firebaseAuth, (currentUser) => {
+      if (!currentUser) {
+        navigate("/connexion");
+      }
+    });
+    return () => logout();
+  }, [navigate]);
 
   return (
     <div>
