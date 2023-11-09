@@ -12,13 +12,28 @@ const Signup = () => {
     password: "",
   });
 
+  const [erreurEmail, setErreurEmail] = useState("");
+  const [erreurMdp, setErreurMdp] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { email, password } = values;
+
     try {
-      const { email, password } = values;
       await createUserWithEmailAndPassword(firebaseAuth, email, password);
     } catch (err) {
-      console.log(err);
+      if (err.code === "auth/invalid-email") {
+        setErreurEmail("Format d'email invalide.");
+      } else if (err.code === "auth/missing-password") {
+        setErreurMdp("Mot de passe vide");
+      } else if (err.code === "auth/weak-password") {
+        setErreurMdp("Mot de passe vide");
+      }
+      setTimeout(() => {
+        setErreurEmail("");
+        setErreurMdp("");
+      }, 3000);
     }
   };
 
@@ -37,7 +52,7 @@ const Signup = () => {
   return (
     <div>
       <div className="h-screen flex items-center justify-center ">
-        <form className="back-grey2 flex flex-col gap-6 p-12 rounded-lg ">
+        <form className="back-grey2 flex flex-col gap-4 p-12 rounded-lg ">
           <h1 className="text-3xl">Inscription</h1>
           <input
             type="text"
@@ -48,6 +63,8 @@ const Signup = () => {
               setValues({ ...values, [e.target.name]: e.target.value })
             }
           />
+          {erreurEmail && <p className="text-red-500">{erreurEmail}</p>}
+
           <input
             type="password"
             placeholder="Mot de passe"
@@ -57,6 +74,7 @@ const Signup = () => {
               setValues({ ...values, [e.target.name]: e.target.value })
             }
           />
+          {erreurMdp && <p className=" text-red-500 ">{erreurMdp}</p>}
           <button
             className="back-red text-white rounded-sm px-2 py-1 transition duration-200 shadow-red"
             onClick={handleSubmit}

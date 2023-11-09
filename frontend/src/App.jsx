@@ -8,10 +8,13 @@ import Movies from "./pages/home/Movies";
 import List from "./pages/home/List";
 import Navbar from "./components/Navbar";
 import Video from "./pages/home/Video";
+import { PopupProvider, usePopup } from "./PopupContext";
 
 const Layout = () => {
+  const { popup } = usePopup();
   return (
     <>
+      {popup.show && <div className="popup">{popup.message}</div>}
       <nav className="m-8">
         <Navbar />
       </nav>
@@ -60,7 +63,11 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <PopupProvider>
+      <RouterProvider router={router} />
+    </PopupProvider>
+  );
 };
 
 export default App;

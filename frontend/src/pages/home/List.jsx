@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import CardBody from "../../components/CardBody";
 
 const List = () => {
-  const movies = useSelector((state) => state.movieApp.movies);
+  const movies = useSelector((state) => state.movieApp.likedMovies);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

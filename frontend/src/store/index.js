@@ -12,6 +12,7 @@ const initialState = {
   movies: [],
   genresLoaded: false,
   genres: [],
+  likedMovies: [],
 };
 
 export const getGenres = createAsyncThunk("movieApp/genres", async () => {
@@ -72,9 +73,7 @@ export const getUserLikedMovies = createAsyncThunk(
   async (email) => {
     const {
       data: { movies },
-    } = await axios.get(
-      `https://movieapp-back-fcot.onrender.com/server/user/liked/${email}`
-    );
+    } = await axios.get(`http://localhost:5000/server/user/liked/${email}`);
     return movies;
   }
 );
@@ -84,13 +83,10 @@ export const removeFromLikedMovies = createAsyncThunk(
   async ({ movieId, email }) => {
     const {
       data: { movies },
-    } = await axios.put(
-      `https://movieapp-back-fcot.onrender.com/server/user/delete`,
-      {
-        email,
-        movieId,
-      }
-    );
+    } = await axios.put(`http://localhost:5000/server/user/delete`, {
+      email,
+      movieId,
+    });
     return movies;
   }
 );
@@ -123,10 +119,10 @@ const appSlice = createSlice({
       state.movies = action.payload;
     });
     builder.addCase(getUserLikedMovies.fulfilled, (state, action) => {
-      state.movies = action.payload;
+      state.likedMovies = action.payload;
     });
     builder.addCase(removeFromLikedMovies.fulfilled, (state, action) => {
-      state.movies = action.payload;
+      state.likedMovies = action.payload;
     });
   },
 });

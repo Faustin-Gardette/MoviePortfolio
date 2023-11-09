@@ -4,15 +4,17 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { firebaseAuth } from "../utils/firebase";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeFromLikedMovies } from "../store";
+import { usePopup } from "../PopupContext";
 
 const CardBody = ({ movieData, isLiked = false }) => {
   const [isHovered, setIsHovered] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [email, setEmail] = useState(undefined);
+
+  const { showPopup } = usePopup();
 
   useEffect(() => {
     const getEmail = onAuthStateChanged(firebaseAuth, (currentUser) => {
@@ -27,17 +29,17 @@ const CardBody = ({ movieData, isLiked = false }) => {
 
   const addToList = async () => {
     try {
-      await axios.post(
-        "https://movieapp-back-fcot.onrender.com/server/user/add",
-        {
-          email,
-          data: movieData,
-        }
-      );
+      await axios.post("http://localhost:5000/server/user/add", {
+        email,
+        data: movieData,
+      });
+
+      showPopup("Film ajouté à votre liste");
     } catch (err) {
       console.log(err);
     }
   };
+
   return (
     <div
       onMouseEnter={() => setIsHovered(true)}

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../../utils/firebase";
 import NotContent from "../../components/NotContent";
+import Spinner from "../../components/Spinner";
 
 const Tv = () => {
   const dispatch = useDispatch();

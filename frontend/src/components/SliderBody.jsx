@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import CardBody from "./CardBody";
 
-const SliderBody = ({ data, title }) => {
+const SliderBody = ({ data, title, userMovies }) => {
   return (
     <div className="py-6">
       <h1 className="text-3xl pb-4 font-semibold ">{title}</h1>
@@ -36,7 +36,7 @@ const SliderBody = ({ data, title }) => {
       >
         {data.map((movie, index) => (
           <SwiperSlide key={index}>
-            <CardBody movieData={movie} />
+            <CardBody movieData={movie} userMovies={userMovies} />
           </SwiperSlide>
         ))}
       </Swiper>
